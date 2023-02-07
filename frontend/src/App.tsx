@@ -19,9 +19,6 @@ export const App = () => {
           {message}
         </p>
       </header>
-      <div className="nav">
-        <p>navbar</p>
-      </div>
     </div>
   );
 }
