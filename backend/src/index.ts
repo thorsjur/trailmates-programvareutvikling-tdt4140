@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
 import express = require("express")
+//import handleSubmit from './handles/handlesubmit';
+
+//handleSubmit("Tester kobling")
+//Tester kobling til Firebase. Skal komme opp under FireStore Database
 
 const cors = require("cors");
 
