@@ -5,7 +5,7 @@ var firebase_1 = require("../firebase_setup/firebase");
 var handleSubmit = function (testdata) {
     var ref = (0, firestore_1.collection)(firebase_1.db, "test_data"); // Firebase creates this automatically
     var data = {
-        testData: testdata
+        testData: testdata,
     };
     try {
         (0, firestore_1.addDoc)(ref, data);
