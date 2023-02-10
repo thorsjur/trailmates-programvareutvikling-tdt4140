@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import express = require("express")
+import express = require("express");
 //import handleSubmit from './handles/handlesubmit';
 
 //handleSubmit("Tester kobling")
@@ -11,11 +11,11 @@ const app = express();
 
 app.use(cors());
 
-app.get('/', (req: Request, res: Response)  => {
+app.get("/", (req: Request, res: Response) => {
   res.json({
     message: "Hello World!",
-    success: true
-  })
+    success: true,
+  });
 });
 
 app.listen(3001, () => {
