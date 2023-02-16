@@ -46,7 +46,14 @@ export const Navbar = () => {
       />
       <Searchbar type="nav" />
       <NavLinks />
-      <Button text="Logg inn" styling="secondary-outline" />
+      <Button
+        text="Logg inn"
+        styling={
+          isScrolled || location.pathname !== "/"
+            ? "accent-outline"
+            : "secondary-outline"
+        }
+      />
     </nav>
   );
 };
