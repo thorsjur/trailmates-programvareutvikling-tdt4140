@@ -1,22 +1,15 @@
 import { NavLink } from "react-router-dom";
 import "./Header.css";
+import Searchbar from "../Searchbar/Searchbar";
 import { Button } from "../Button/Button";
 
 export const Header = () => {
   return (
     <header>
-      <form>
-        <input
-          type="text"
-          placeholder="Search.."
-          name="search"
-          className="search-bar"
-        />
-        <button type="submit" className="search-button">
-          Search
-        </button>
-      </form>
-      <nav>
+      <div className="container start">
+        <Searchbar type="nav" width="24vw" />
+      </div>
+      <nav className="container">
         <ul>
           <li>
             <NavLink to="/users" className="nav-link">
@@ -30,8 +23,8 @@ export const Header = () => {
           </li>
         </ul>
       </nav>
-      <div className="button-container">
-        <Button styling="secondary-outline" text="Logg inn" width="150px" />
+      <div className="container end">
+        <Button styling="secondary-outline" text="Logg inn" width="12vw" />
       </div>
     </header>
   );
