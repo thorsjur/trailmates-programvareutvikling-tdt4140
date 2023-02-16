@@ -1,14 +1,19 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import "./App.css";
 import { Header } from "./components/Header/Header";
+import { Footer } from "./components/Footer/Footer";
+import { SplitSection } from "./components/SplitSection/SplitSection";
+import { Navbar } from "./components/Navbar/Navbar";;
+
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
+
 import { Frontpage } from "./pages/Frontpage/Frontpage";
 import { Footer } from "./components/Footer/Footer";
 import Searchresults from "./pages/Searchresults/Searchresults";
 
 const fromApi = (set: Dispatch<SetStateAction<any>>) => {
-  fetch("http://localhost:3001/")
+  fetch("http://localhost:3000/")
     .then((res) => res.json())
     .then((data) => {
       set(data);
@@ -21,15 +26,15 @@ export const App = () => {
   useEffect(() => fromApi((data) => setMessage(data.message)), []);
 
   return (
-    <BrowserRouter>
-      <Header />
-      <main>
-        <Routes>
-          <Route path="/search" element={<Searchresults />} />
-          <Route path="/" element={<Frontpage />} />
-        </Routes>
-        <Footer />
-      </main>
-    </BrowserRouter>
-  );
-};
+      <BrowserRouter>
+        <Navbar></Navbar>
+        <Header />
+        <SplitSection />
+        <main>
+          <Routes>
+            <Route path="/" element={<Frontpage />} />
+          </Routes>
+          <Footer />
+        </main>
+      </BrowserRouter>
+  )};
