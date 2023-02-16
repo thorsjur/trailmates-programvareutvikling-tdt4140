@@ -1,81 +1,78 @@
 .cover {
-    background-size: cover;
-    height:100vh;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
-  }
-  
-  .cover h1 {
-    font-size: 4vw;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 120%;
-    margin: 5% 0 0 8%;
-    
-  }
-
-
-.search-bar-cover{
-    background-color: rgb(0,0,0,0);
-    border: none;
-    font-size: 1.5vw;
+  background-size: cover;
+  height: 100vh;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
 }
 
-.search-cover{
-    font-family: "Montserrat", sans-serif;
-    background-color: rgb(0,0,0,0);
-    border-bottom:#ea712f 3px solid;
-    width: 35vw;
-    height: 5vh;
-    margin: 4% 0 0 8%;
-    padding: 0 0 .5% 0;
-    display: flex;
-    justify-content: space-between;
+.cover h1 {
+  font-size: 4vw;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  margin: 5% 0 0 8%;
+}
+
+.search-bar-cover {
+  background-color: rgb(0, 0, 0, 0);
+  border: none;
+  font-size: 1.5vw;
+}
+
+.search-cover {
+  font-family: "Montserrat", sans-serif;
+  background-color: rgb(0, 0, 0, 0);
+  border-bottom: #ea712f 3px solid;
+  width: 35vw;
+  height: 5vh;
+  margin: 4% 0 0 8%;
+  padding: 0 0 0.5% 0;
+  display: flex;
+  justify-content: space-between;
 }
 
 .search-button-cover {
-    background-color: rgb(0,0,0,0);
-    cursor: pointer;
-    font-size: 1rem;
-    border: 0;
-    height: 30px;
-    color:#f9f9f9;
+  background-color: rgb(0, 0, 0, 0);
+  cursor: pointer;
+  font-size: 1rem;
+  border: 0;
+  height: 30px;
+  color: #f9f9f9;
 }
 
 .search-button-cover:hover {
-    opacity: .7;
+  opacity: 0.7;
 }
 
-input{
-    font-weight: 500;
-    color:#f9f9f9;
+input {
+  font-weight: 500;
+  color: #f9f9f9;
 }
 
-input:focus{
-    outline: none;
+input:focus {
+  outline: none;
 }
 
 .scrolldown-indicator {
-    animation: bounce 2s ease infinite;
-    bottom: 0;
-    color:#ea712f;
-    display: inline-block;
-    margin: 0 0 1% 0;
-    left: 47.8vw;
-    position: absolute;
-    text-align: center;
-    width: 3vw;
-    font-size: 2rem;
-    font-weight: 700;
-    height: 3rem;
-    
+  animation: bounce 2s ease infinite;
+  bottom: 0;
+  color: #ea712f;
+  display: inline-block;
+  margin: 0 0 1% 0;
+  left: 47.8vw;
+  position: absolute;
+  text-align: center;
+  width: 3vw;
+  font-size: 2rem;
+  font-weight: 700;
+  height: 3rem;
 }
-  
-  @keyframes bounce {
-    50% {
-      transform: translateY(-50%);
-    }
+
+@keyframes bounce {
+  50% {
+    transform: translateY(-50%);
   }
+}

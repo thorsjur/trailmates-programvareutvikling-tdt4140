@@ -1,12 +1,14 @@
 import "./Header.css";
-import img from"../assets/cover.svg"
-import { ReactComponent as SearchIcon } from '../assets/search_icon.svg';
-
+import img from "../assets/cover.svg";
+import { ReactComponent as SearchIcon } from "../assets/search_icon.svg";
 
 export const Header = () => {
   return (
     <header className="cover" style={{ backgroundImage: `url(${img})` }}>
-      <h1>Hva er ditt<br/> neste reisemål?</h1>
+      <h1>
+        Hva er ditt
+        <br /> neste reisemål?
+      </h1>
       <form className="search-cover">
         <input
           type="text"
@@ -15,7 +17,7 @@ export const Header = () => {
           className="search-bar-cover"
         />
         <button type="submit" className="search-button-cover">
-          <SearchIcon/>
+          <SearchIcon />
         </button>
       </form>
       <div className="scrolldown-indicator">╲╱</div>

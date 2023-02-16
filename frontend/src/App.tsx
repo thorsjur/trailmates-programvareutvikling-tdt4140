@@ -1,9 +1,8 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import "./App.css";
 import { Header } from "./components/Header/Header";
-import { Footer } from "./components/Footer/Footer";
 import { SplitSection } from "./components/SplitSection/SplitSection";
-import { Navbar } from "./components/Navbar/Navbar";;
+import { Navbar } from "./components/Navbar/Navbar";
 
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
@@ -26,15 +25,16 @@ export const App = () => {
   useEffect(() => fromApi((data) => setMessage(data.message)), []);
 
   return (
-      <BrowserRouter>
-        <Navbar></Navbar>
-        <Header />
-        <SplitSection />
-        <main>
-          <Routes>
-            <Route path="/" element={<Frontpage />} />
-          </Routes>
-          <Footer />
-        </main>
-      </BrowserRouter>
-  )};
+    <BrowserRouter>
+      <Navbar></Navbar>
+      <Header />
+      <SplitSection />
+      <main>
+        <Routes>
+          <Route path="/" element={<Frontpage />} />
+        </Routes>
+        <Footer />
+      </main>
+    </BrowserRouter>
+  );
+};
