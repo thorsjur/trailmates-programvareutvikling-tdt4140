@@ -1,12 +1,8 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import "./App.css";
-import { Header } from "./components/Header/Header";
-import { SplitSection } from "./components/SplitSection/SplitSection";
 import { Navbar } from "./components/Navbar/Navbar";
-
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
-
 import { Frontpage } from "./pages/Frontpage/Frontpage";
 import { Footer } from "./components/Footer/Footer";
 import Searchresults from "./pages/Searchresults/Searchresults";
