@@ -1,0 +1,4 @@
+.offset-container {
+  position: absolute;
+  top: var(--header-offset) !important;
+}
