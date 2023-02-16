@@ -27,11 +27,10 @@ export const App = () => {
   return (
     <BrowserRouter>
       <Navbar></Navbar>
-      <Header />
-      <SplitSection />
       <main>
         <Routes>
           <Route path="/" element={<Frontpage />} />
+          <Route path="/search" element={<Searchresults />} />
         </Routes>
         <Footer />
       </main>
