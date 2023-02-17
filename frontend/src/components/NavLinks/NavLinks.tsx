@@ -11,10 +11,10 @@ const NavLinks: React.FC = () => {
       <NavLink className={activeStyle} end to="/">
         Utforsk
       </NavLink>
-      <NavLink className={activeStyle} end to="/minereiser">
+      <NavLink className={activeStyle} end to="/privatepage">
         Mine Reiser
       </NavLink>
-      <NavLink className={activeStyle} end to="/profilinnstillinger">
+      <NavLink className={activeStyle} end to="/publicpage">
         Favoritter
       </NavLink>
     </div>
