@@ -1,6 +1,7 @@
 import React from "react";
 import "./SplitSection.css";
 import img from "../assets/splitsec.svg";
+import { TitleSeperator } from "../TitleSeperator/TitleSeperator";
 
 export const SplitSection = () => {
   return (
@@ -14,7 +15,7 @@ export const SplitSection = () => {
         <h2>
           Vurderer du backpacking som <br /> ditt neste eventyr?
         </h2>
-        <div className="seperator"></div>
+        <TitleSeperator width="70%" height="1%" color="secondary" />
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
