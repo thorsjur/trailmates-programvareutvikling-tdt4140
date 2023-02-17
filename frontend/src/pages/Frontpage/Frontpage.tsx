@@ -8,9 +8,11 @@ export const Frontpage = () => {
     <div className="offset-container">
       <Header />
       <SplitSection />
-      <TripSection text="Toppreiser" />
-      <TripSection text="Drømmereiser under 10 000kr" />
-      <TripSection text="Anbefalt for deg" />
+      <div className="frontpage-container">
+        <TripSection text="Toppreiser" />
+        <TripSection text="Drømmereiser under 10 000kr" />
+        <TripSection text="Anbefalt for deg" />
+      </div>
     </div>
   );
 };

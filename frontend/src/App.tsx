@@ -7,6 +7,7 @@ import { Frontpage } from "./pages/Frontpage/Frontpage";
 import Footer from "./components/Footer/Footer";
 import Searchresults from "./pages/Searchresults/Searchresults";
 import UserProvider from "./authentication/UserProvider";
+import { PrivateProfile } from "./pages/PrivateProfile/PrivateProfile";
 
 const fromApi = (set: Dispatch<SetStateAction<any>>) => {
   fetch("http://localhost:3000/")
@@ -25,6 +26,7 @@ export const App = () => {
           <Routes>
             <Route path="/" element={<Frontpage />} />
             <Route path="/search" element={<Searchresults />} />
+            <Route path="/profilinnstillinger" element={<PrivateProfile />} />
           </Routes>
           <Footer />
         </main>
