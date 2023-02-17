@@ -3,6 +3,7 @@ import profilepic from "../../components/assets/profilepic.png";
 import { ProfileItem } from "../../components/ProfileItem/ProfileItem";
 import { User } from "../../types/user";
 import { Button } from "../../components/Button/Button";
+import { useEffect } from "react";
 
 const obj: User = {
   _id: 1,
@@ -16,6 +17,9 @@ const obj: User = {
 };
 
 export const PrivateProfile = () => {
+  useEffect(() => {
+    document.title = "Min Profil";
+  }, []);
   return (
     <div className="container-privateprofile">
       <div className="container-aboutme">

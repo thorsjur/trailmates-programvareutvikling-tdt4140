@@ -5,6 +5,7 @@ import { User } from "../../types/user";
 import { Button } from "../../components/Button/Button";
 import { TripSection } from "../../components/TripSection/TripSection";
 import { TitleSeperator } from "../../components/TitleSeperator/TitleSeperator";
+import { useEffect } from "react";
 
 const obj: User = {
   _id: 1,
@@ -20,6 +21,9 @@ const obj: User = {
 const fname: string = obj.name.split(" ")[0];
 
 export const PublicProfile = () => {
+  useEffect(() => {
+    document.title = fname + "'s profil";
+  }, []);
   return (
     <div className="container-public-profile">
       <div className="flex-row m5">
