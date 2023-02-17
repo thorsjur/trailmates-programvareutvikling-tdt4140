@@ -14,7 +14,7 @@ const NavLinks: React.FC = () => {
       <NavLink className={activeStyle} end to="/minereiser">
         Mine Reiser
       </NavLink>
-      <NavLink className={activeStyle} end to="/favoritter">
+      <NavLink className={activeStyle} end to="/profilinnstillinger">
         Favoritter
       </NavLink>
     </div>

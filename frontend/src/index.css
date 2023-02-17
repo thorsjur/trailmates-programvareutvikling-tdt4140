@@ -9,6 +9,8 @@
 
   --header-height: 15vh;
   --header-offset: -15vh;
+
+  --global-padding: 0 4%;
 }
 
 body {
@@ -18,7 +20,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-main {
+main:not(header) {
   position: relative;
   top: var(--header-height);
 }

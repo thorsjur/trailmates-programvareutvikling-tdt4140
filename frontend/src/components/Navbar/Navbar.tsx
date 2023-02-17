@@ -53,6 +53,8 @@ export const Navbar = () => {
             ? "accent-outline"
             : "secondary-outline"
         }
+        width="12%"
+        height="20%"
       />
     </nav>
   );
