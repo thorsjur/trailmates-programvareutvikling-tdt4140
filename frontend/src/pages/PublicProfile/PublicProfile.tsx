@@ -2,7 +2,6 @@ import "./PublicProfile.css";
 import profilepic from "../../components/assets/profilepic.png";
 import wavebg from "../../components/assets/wavebg.svg";
 import { User } from "../../types/user";
-import { Button } from "../../components/Button/Button";
 import { TripSection } from "../../components/TripSection/TripSection";
 import { TitleSeperator } from "../../components/TitleSeperator/TitleSeperator";
 import { useEffect } from "react";
@@ -57,7 +56,7 @@ export const PublicProfile = () => {
           <h2>{fname}'s Trips!</h2>
           <TitleSeperator height="5px" width="25vw" color="accent" />
         </div>
-        <TripSection text="" />
+        <TripSection text="" textColor="white" />
       </div>
       <div className="container-public-user-reviews flex-column">
         <h2>{fname}'s Reviews</h2>
