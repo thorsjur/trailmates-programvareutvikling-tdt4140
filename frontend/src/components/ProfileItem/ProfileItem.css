@@ -10,7 +10,8 @@
   margin-bottom: 0;
 }
 
-.container-inforow p {
+.container-inforow p,
+.container-inforow input[type="text"] {
   font-size: 1.5vw;
   margin: 1% 0 3% 0;
 }
@@ -29,8 +30,13 @@
   justify-content: space-between;
 }
 
-.user-context p {
+.user-context p,
+.user-context input[type="text"] {
   margin-left: 5%;
+}
+
+.user-context input[type="text"] {
+  border: 2px solid #333;
 }
 
 .edit-button {
@@ -50,6 +56,14 @@
   margin: 0 0 2% 0;
 }
 
+.aboutme-textarea {
+  all: unset;
+  height: min-content;
+  width: 100%;
+  resize: none;
+  border: 2px solid #333;
+}
+
 @media only screen and (max-width: 768px) {
   .container-inforow h3 {
     font-size: 1.2rem;
@@ -58,7 +72,8 @@
     margin-bottom: 0;
   }
 
-  .container-inforow p {
+  .container-inforow p,
+  .container-inforow input[type="text"] {
     font-size: 1rem;
     margin: 1% 0 3% 0;
   }
