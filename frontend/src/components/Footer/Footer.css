@@ -89,3 +89,24 @@ body {
   margin-bottom: 0;
   font-size: 1vw;
 }
+
+@media only screen and (max-width: 768px) {
+  .ft-logo {
+    height: 8vh;
+  }
+
+  .ft-catchphrase {
+    display: none;
+  }
+  .footer-middle p {
+    display: none;
+  }
+
+  .ft-main-item a {
+    font-size: 4vw;
+  }
+
+  .footer-links {
+    justify-self: center;
+  }
+}

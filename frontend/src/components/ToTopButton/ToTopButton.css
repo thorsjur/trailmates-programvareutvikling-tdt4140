@@ -22,3 +22,16 @@
   margin: auto !important;
   height: auto;
 }
+
+@media only screen and (max-width: 768px) {
+  .to-top-button {
+    opacity: 0.6;
+    width: 12vw;
+    height: 12vw;
+    bottom: 1.5vh;
+    right: 3vw;
+  }
+  .to-top-button:active {
+    opacity: 1;
+  }
+}
