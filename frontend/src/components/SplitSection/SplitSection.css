@@ -42,13 +42,20 @@
     flex-direction: column;
   }
   .split-img {
+    height: 70vh;
+    object-fit: cover;
     width: 100vw;
+  }
+
+  .splitsec-right {
+    padding: 5% 10%;
   }
 
   .container h2 {
     font-weight: 700;
-    font-size: 5vw;
+    font-size: 7vw;
     text-align: center;
+    margin: 10% 0;
   }
 
   .container p {
