@@ -102,6 +102,7 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
           clearInputFields();
           setErrorMessage("");
           setIsVisible(false);
+          window.location.reload();
         }
       },
     );
@@ -120,6 +121,7 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
         clearInputFields();
         setErrorMessage("");
         setIsVisible(false);
+        window.location.reload();
       }
     });
   };
@@ -152,21 +154,23 @@ export const LoginPopup = ({ visible, setIsVisible }: Props) => {
           {/* TODO: Replace with actual content */}
           <h1>TrailMates</h1>
           <p>
-          Velkommen til TrailMates, den ultimate destinasjonen for backpackere 
-          som ønsker å utforske verden på en autentisk og uforglemmelig måte! 
-          Vi er glade for å ha deg her, og vi er her for å hjelpe deg med å få 
-          mest mulig ut av backpacking-opplevelsene dine.
+            Velkommen til TrailMates, den ultimate destinasjonen for backpackere
+            som ønsker å utforske verden på en autentisk og uforglemmelig måte!
+            Vi er glade for å ha deg her, og vi er her for å hjelpe deg med å få
+            mest mulig ut av backpacking-opplevelsene dine.
             <br />
             <br />
-            Vi vet at backpacking kan være en utfordrende og spennende opplevelse, 
-            og det er derfor vi er her for å hjelpe deg med alt du trenger for å lykkes. 
-            Fra å velge den beste tiden på året for å besøke forskjellige steder, til å 
-            finne de mest pittoreske campingplassene, så har vi deg dekket.
+            Vi vet at backpacking kan være en utfordrende og spennende
+            opplevelse, og det er derfor vi er her for å hjelpe deg med alt du
+            trenger for å lykkes. Fra å velge den beste tiden på året for å
+            besøke forskjellige steder, til å finne de mest pittoreske
+            campingplassene, så har vi deg dekket.
             <br />
             <br />
-            Takk for at du velger TrailMates som din guide til backpacking-verdenen. 
-            Vi er her for å hjelpe deg med å få mest mulig ut av opplevelsen og utforske 
-            verden på en unik og autentisk måte. Lykke til med din neste eventyrlystne reise!
+            Takk for at du velger TrailMates som din guide til
+            backpacking-verdenen. Vi er her for å hjelpe deg med å få mest mulig
+            ut av opplevelsen og utforske verden på en unik og autentisk måte.
+            Lykke til med din neste eventyrlystne reise!
           </p>
         </div>
         <div className="right-container">
