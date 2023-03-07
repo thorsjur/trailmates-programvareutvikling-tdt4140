@@ -1,5 +1,4 @@
 import "./PublicProfile.css";
-import profilepic from "../../components/assets/profilepic.png";
 import wavebg from "../../components/assets/wavebg.svg";
 import { TripSection } from "../../components/TripSection/TripSection";
 import { TitleSeperator } from "../../components/TitleSeperator/TitleSeperator";
@@ -7,12 +6,14 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import { UserData, getUserData } from "../../authentication/firestore";
 import { useParams } from "react-router-dom";
 import { User, UserContext } from "../../authentication/UserProvider";
+import { getImgSrc } from "../../storage/util/methods";
 
 export const PublicProfile = () => {
   const [user, setUser] = useState<UserData | User | null>();
   const [isValidUser, setIsValidUser] = useState<boolean>(false);
   const { uid } = useParams();
   const { currentUser } = useContext(UserContext);
+  const [profilePicSrc, setProfilePicSrc] = useState<string>();
 
   useEffect(() => {
     if (uid === currentUser?.userUid) {
@@ -30,7 +31,7 @@ export const PublicProfile = () => {
           setIsValidUser(false);
         });
     }
-  }, [uid]);
+  }, [uid, currentUser]);
 
   const fname = useMemo(() => {
     return user?.name.split(" ")[0];
@@ -38,7 +39,11 @@ export const PublicProfile = () => {
 
   useEffect(() => {
     document.title = fname + "s profil";
-  }, [user]);
+
+    getImgSrc(`profilepics/${uid}`).then((url) => {
+      setProfilePicSrc(url);
+    });
+  }, [user, fname, uid]);
 
   return (
     <div className="container-public-profile">
@@ -48,7 +53,7 @@ export const PublicProfile = () => {
             <div className="container-public-userinfo flex-column">
               <div
                 className="public-profile-img"
-                style={{ backgroundImage: `url(${profilepic})` }}
+                style={{ backgroundImage: `url(${profilePicSrc})` }}
               />
               <h1>{user.name}</h1>
               <div className="container-public-userinfo-sub">
