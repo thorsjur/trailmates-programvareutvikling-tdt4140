@@ -4,6 +4,7 @@ import "./TripForm.css";
 import { UserContext } from "../../authentication/UserProvider";
 import { uploadFile } from "../../storage/util/methods";
 import { postTrip, TripSubmission } from "../../trips/trip";
+import { Navigate, useNavigate } from "react-router-dom";
 
 interface CustomElements extends HTMLFormControlsCollection {
   startCity: HTMLInputElement;
@@ -25,6 +26,8 @@ export const TripForm = () => {
   const [imageIds, setImageIds] = useState<string[]>([]);
   const [files, setFiles] = useState<FileList | null>(null);
   const { currentUser } = useContext(UserContext);
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const uploadFiles = async (tripId: string) => {
     for (let i = 0; i < (files?.length || 0); i++) {
@@ -47,6 +50,8 @@ export const TripForm = () => {
 
   const onSubmit = async (event: FormEvent<CustomForm>) => {
     event.preventDefault();
+    if (isLoading) return;
+
     const target = event.currentTarget.elements;
 
     const tripSubmission: TripSubmission = {
@@ -62,10 +67,16 @@ export const TripForm = () => {
       imageIds: imageIds,
       posterUid: currentUser?.userUid!,
     };
-
+    setIsLoading(true);
     const { tripId } = await postTrip(tripSubmission);
-    uploadFiles(tripId);
+    await uploadFiles(tripId);
+    navigate("/reiserute/" + tripId);
+    setIsLoading(false);
   };
+
+  if (!currentUser) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <form className="form" onSubmit={onSubmit}>
