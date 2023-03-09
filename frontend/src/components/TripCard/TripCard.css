@@ -121,6 +121,7 @@ h5 {
 .container-card-readmore .card-readmore-text {
   transition: all 0.2s ease-in;
   visibility: hidden;
+  color: var(--white-font);
 }
 
 .container-card-readmore .card-readmore-underline {

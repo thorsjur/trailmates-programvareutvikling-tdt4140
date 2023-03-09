@@ -3,7 +3,7 @@ import { ReactComponent as FilledHeart } from "../../resources/media/heart-fille
 import { ReactComponent as Arrow } from "../../components/assets/card-arrow.svg";
 import "./TripCard.css";
 import Trip from "../../trips/trip";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getImgUrl } from "../../storage/util/methods";
 
 interface Props {
@@ -15,16 +15,22 @@ export const TripCard = ({ trip, color }: Props) => {
   // TODO: Check if the logged in user has liked this trip already.
   const [liked, setLiked] = useState(false);
   const [imageUrl, setImageUrl] = useState<string | undefined>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!trip.imageIds) return;
     if (trip.imageIds.length === 0) return;
     getImgUrl(`trips/${trip.tripId}/${trip.imageIds[0]}`).then(setImageUrl);
-  }, []);
+  }, [trip]);
 
   const handleClick = () => {
     // TODO: link a backend call to save the liked status.
     setLiked(!liked);
+  };
+
+  const handleTripLinkClicked = () => {
+    navigate(`/reiserute/${trip.tripId}`);
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -39,15 +45,10 @@ export const TripCard = ({ trip, color }: Props) => {
             onClick={handleClick}
           />
           <div className="card-readmore-text">
-            <NavLink
-              style={{ textDecoration: "none" }}
-              className="flex-row"
-              end
-              to={"/reiserute/" + trip.tripId}
-            >
+            <span className="flex-row" onClick={handleTripLinkClicked}>
               Les mer
               <Arrow className="card-readmore-arrow" />
-            </NavLink>
+            </span>
             <div className="card-readmore-underline"></div>
           </div>
         </div>

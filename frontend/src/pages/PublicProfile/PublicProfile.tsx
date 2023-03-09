@@ -45,16 +45,17 @@ export const PublicProfile = () => {
     return user?.name.split(" ")[0];
   }, [user]);
 
+  const possesiveFName = useMemo(() => {
+    return fname?.endsWith("s") ? fname + "'" : fname + "s";
+  }, [fname]);
+
   useEffect(() => {
-    if (fname?.endsWith("s")) {
-      document.title = fname + " sin profil";
-    }
-    document.title = fname + "s profil";
+    document.title = possesiveFName + " profil";
 
     getImgUrl(`profilepics/${uid}`).then((url) => {
       setProfilePicSrc(url);
     });
-  }, [user, fname, uid]);
+  }, [user, uid, possesiveFName]);
 
   return (
     <div className="container-public-profile">
@@ -102,13 +103,13 @@ export const PublicProfile = () => {
             style={{ backgroundImage: `url(${wavebg})` }}
           >
             <div className="title-container-public-usertrips flex-column">
-              <h2>{fname}s reiser!</h2>
+              <h2>{possesiveFName} reiser!</h2>
               <TitleSeperator height="5px" width="25vw" color="accent" />
             </div>
             <TripSection trips={trips} text="" textColor="white" />
           </div>
           <div className="container-public-user-reviews flex-column">
-            <h2>{fname}s erfaringer</h2>
+            <h2>{possesiveFName} erfaringer</h2>
             <TitleSeperator height="5px" width="25vw" color="accent" />
           </div>
         </>

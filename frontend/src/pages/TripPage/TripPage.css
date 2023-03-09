@@ -5,9 +5,10 @@
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: end;
-  align-items: start;
+  justify-content: flex-end;
+  align-items: flex-start;
   padding: var(--global-padding);
+  box-shadow: inset 0 0 0 100vw rgba(0, 0, 0, 0.3);
 }
 
 .cover-TripPage-info {
@@ -172,11 +173,11 @@
   top: 93vh;
 }
 
-.trippage-scrolldown-indicator a {
+.trippage-scrolldown-indicator p {
   color: var(--secondary);
 }
 
-.trippage-scrolldown-indicator a:hover {
+.trippage-scrolldown-indicator p:hover {
   cursor: pointer;
 }
 
@@ -189,6 +190,10 @@
   margin-top: 0;
   font-size: 1.5vw;
   margin-bottom: 2%;
+}
+
+.cover-info-container > .flex-column.cover-TripPage-info {
+  text-shadow: 3px 0 8px rgba(0, 0, 0, 0.4);
 }
 
 @media only screen and (max-width: 768px) {

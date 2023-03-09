@@ -28,19 +28,7 @@ export const TripPage = () => {
     window.scrollTo({
       top: window.innerHeight - 10,
       behavior: "smooth",
-      /* you can also use 'auto' behaviour
-         in place of 'smooth' */
     });
-  };
-
-  const updateImageUrls = async () => {
-    if (!trip) return;
-    const newUrls: string[] = await Promise.all(
-      trip.imageIds.map((imageId) =>
-        getImgUrl(`trips/${trip.tripId}/${imageId}`),
-      ),
-    );
-    setImageUrls(newUrls);
   };
 
   useEffect(() => {
@@ -50,9 +38,19 @@ export const TripPage = () => {
   useEffect(() => {
     if (!tripId) return;
     getTripById(tripId).then(setTrip);
-  }, []);
+  }, [tripId]);
 
   useEffect(() => {
+    const updateImageUrls = async () => {
+      if (!trip) return;
+      const newUrls: string[] = await Promise.all(
+        trip.imageIds.map((imageId) =>
+          getImgUrl(`trips/${trip.tripId}/${imageId}`),
+        ),
+      );
+      setImageUrls(newUrls);
+    };
+
     if (!trip) return;
     updateImageUrls();
     getUserData(trip.posterUid).then(setUser);
@@ -61,7 +59,7 @@ export const TripPage = () => {
   useEffect(() => {
     if (!trip) return;
     getImgUrl(`profilepics/${trip.posterUid}`).then(setProfilePicUrl);
-  }, [user]);
+  }, [user, trip]);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -95,7 +93,7 @@ export const TripPage = () => {
             </h2>
           </div>
           <div className="trippage-scrolldown-indicator">
-            <a>╲╱</a>
+            <p onClick={scrolldown}>╲╱</p>
           </div>
           <div className="flex-row cover-TripPage-buttons">
             <Button
@@ -163,12 +161,17 @@ export const TripPage = () => {
             author={maybe(user?.name)}
             trips={11}
             profilePic={profilePictureUrl ? profilePictureUrl : ""}
+            authorUID={maybe(trip?.posterUid)}
           />
         </div>
       </div>
       <div className="trippage-main-container flex-row">
         <div className="trippage-main-l flex-column">
-          <img src={imageUrls[1]} onClick={handleOpenPopup}></img>
+          <img
+            src={imageUrls[1]}
+            onClick={handleOpenPopup}
+            alt="Bilde fra turen"
+          ></img>
           <PopupImageCarousel
             images={imageUrls}
             titles={
@@ -213,7 +216,7 @@ export const TripPage = () => {
           </div>
         </div>
         <div className="trippage-main-r flex-column">
-          <img src={imageUrls[2]}></img>
+          <img src={imageUrls[2]} alt="bilde fra turen"></img>
           <div
             className="flex-row"
             style={{

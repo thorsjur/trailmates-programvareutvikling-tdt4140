@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Trip from "../../trips/trip";
 import { Slider } from "../Slider/Slider";
 import { TripCard } from "../TripCard/TripCard";
@@ -11,8 +10,8 @@ interface Props {
 }
 
 export const TripSection = ({ text, trips, textColor }: Props) => {
-  const items = trips.map((trip, index) => (
-    <TripCard trip={trip} key={index} color={textColor} />
+  const items = trips.map((trip) => (
+    <TripCard trip={trip} key={trip.tripId} color={textColor} />
   ));
 
   return (
