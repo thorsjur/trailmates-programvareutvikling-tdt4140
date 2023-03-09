@@ -6,9 +6,8 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import { UserData, getUserData } from "../../authentication/firestore";
 import { useParams } from "react-router-dom";
 import { User, UserContext } from "../../authentication/UserProvider";
-import { getImgSrc } from "../../storage/util/methods";
+import { getImgUrl } from "../../storage/util/methods";
 import Trip, { getTrips } from "../../trips/trip";
-
 
 export const PublicProfile = () => {
   const [user, setUser] = useState<UserData | User | null>();
@@ -47,12 +46,12 @@ export const PublicProfile = () => {
   }, [user]);
 
   useEffect(() => {
-    if (fname?.endsWith("s")){
+    if (fname?.endsWith("s")) {
       document.title = fname + " sin profil";
     }
     document.title = fname + "s profil";
 
-    getImgSrc(`profilepics/${uid}`).then((url) => {
+    getImgUrl(`profilepics/${uid}`).then((url) => {
       setProfilePicSrc(url);
     });
   }, [user, fname, uid]);

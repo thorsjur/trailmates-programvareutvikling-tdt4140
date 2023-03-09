@@ -1,19 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import "./TripPage.css";
-import img from "../../components/assets/TripPage_header.png";
 import { Button } from "../../components/Button/Button";
 import { TripDetailsItem } from "../../components/TripDetailsItem/TripDetailsItem";
 import { ReviewBox } from "../../components/ReviewBox/ReviewBox";
 import { TripAuthor } from "../../components/TripAuthor/TripAuthor";
 import { PopupImageCarousel } from "../../components/PopupImageCarousel/PopupImageCarousel";
-import caro1 from "../../components/assets/caro/caro1.png";
-import caro2 from "../../components/assets/caro/caro2.png";
-import caro3 from "../../components/assets/caro/caro3.png";
-import caro4 from "../../components/assets/caro/caro4.png";
 import { useParams } from "react-router-dom";
 import Trip, { getTripById } from "../../trips/trip";
 import { getUserData, UserData } from "../../authentication/firestore";
-import { getImgSrc } from "../../storage/util/methods";
+import { getImgUrl } from "../../storage/util/methods";
 
 const defaultProfilePicUrl =
   "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
@@ -27,6 +22,7 @@ export const TripPage = () => {
   const [user, setUser] = useState<UserData | undefined>();
   const [profilePictureUrl, setProfilePicUrl] =
     useState<string>(defaultProfilePicUrl);
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
 
   const scrolldown = () => {
     window.scrollTo({
@@ -40,20 +36,27 @@ export const TripPage = () => {
   useEffect(() => {
     document.title = "Trailmates - Reiseinformajon";
   }, []);
+
   useEffect(() => {
-    if (tripId) {
-      getTripById(tripId).then((trip) => {
-        setTrip(trip);
-        getUserData(trip.posterUID).then((user) => {
-          setUser(user);
-          getImgSrc(`profilepics/${trip.posterUID}`).then(setProfilePicUrl);
-        });
-      });
-    }
+    if (!tripId) return;
+    getTripById(tripId).then(setTrip);
   }, []);
 
+  useEffect(() => {
+    if (!trip) return;
+    trip.imageIds.forEach(async (imageId) => {
+      const imageUrl = await getImgUrl(`trips/${trip.tripId}/${imageId}`);
+      setImageUrls((prev) => [...prev, imageUrl]);
+    });
+    getUserData(trip.posterUid).then(setUser);
+  }, [trip]);
+
+  useEffect(() => {
+    if (!trip) return;
+    getImgUrl(`profilepics/${trip.posterUid}`).then(setProfilePicUrl);
+  }, [user]);
+
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const images = [caro1, caro2, caro3, caro4];
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const handleOpenPopup = () => {
@@ -72,7 +75,7 @@ export const TripPage = () => {
     <>
       <div
         className="cover-TripPage flex-column"
-        style={{ backgroundImage: `url(${img})` }}
+        style={{ backgroundImage: `url(${imageUrls[0]})` }}
       >
         <div className="cover-info-container">
           <div className="flex-column cover-TripPage-info">
@@ -158,21 +161,25 @@ export const TripPage = () => {
       </div>
       <div className="trippage-main-container flex-row">
         <div className="trippage-main-l flex-column">
-          <img src={caro1} onClick={handleOpenPopup}></img>
+          <img src={imageUrls[1]} onClick={handleOpenPopup}></img>
           <PopupImageCarousel
-            images={images}
-            titles={[
-              "City of Rioja",
-              "Celementines in Rioja",
-              "City of Prague",
-              "Streets in Sicily",
-            ]}
-            dates={[
-              "09.Januar.2022",
-              "11.Januar.2022",
-              "10.Januar.2022",
-              "12.Januar.2022",
-            ]}
+            images={imageUrls}
+            titles={
+              [
+                //"City of Rioja",
+                //"Celementines in Rioja",
+                //"City of Prague",
+                //"Streets in Sicily",
+              ]
+            }
+            dates={
+              [
+                //"09.Januar.2022",
+                //"11.Januar.2022",
+                //"10.Januar.2022",
+                //"12.Januar.2022",
+              ]
+            }
             isOpen={isPopupOpen}
             onClose={handleClosePopup}
           />
@@ -199,7 +206,7 @@ export const TripPage = () => {
           </div>
         </div>
         <div className="trippage-main-r flex-column">
-          <img src={caro2}></img>
+          <img src={imageUrls[2]}></img>
           <div
             className="flex-row"
             style={{

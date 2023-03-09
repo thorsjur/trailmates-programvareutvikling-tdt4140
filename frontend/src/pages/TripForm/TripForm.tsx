@@ -28,7 +28,7 @@ export const TripForm = () => {
 
   const uploadFiles = async (tripId: string) => {
     for (let i = 0; i < (files?.length || 0); i++) {
-      const file = files?.item(0);
+      const file = files?.item(i);
       if (
         file?.type !== "image/png" &&
         file?.type !== "image/jpeg" &&
@@ -59,8 +59,8 @@ export const TripForm = () => {
       tripLengthKm: parseInt(target.tripLengthKm.value),
       description: target.description.value,
       attractions: target.attractions.value.split(new RegExp(", +")),
-      imageURLs: imageIds,
-      posterUID: currentUser?.userUid!,
+      imageIds: imageIds,
+      posterUid: currentUser?.userUid!,
     };
 
     const { tripId } = await postTrip(tripSubmission);

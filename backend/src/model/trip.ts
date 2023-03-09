@@ -2,14 +2,14 @@ export interface TripSubmission {
   startCity: string;
   destinationCity: string;
   countries: string[];
-  posterUID: string;
+  posterUid: string;
   price: number;
   tripDurationDays: number;
   description: string;
   degreesCelcius: number;
   tripLengthKm: number;
   attractions: string[];
-  imageURLs: string[];
+  imageIds: string[];
 }
 
 // Data stored in firestore
