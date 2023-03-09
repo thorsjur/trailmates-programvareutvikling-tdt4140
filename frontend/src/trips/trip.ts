@@ -1,11 +1,10 @@
 import { get, post, put } from "../utils/fetchMethods";
 
 // Keep up to date with backend
-export interface TripData {
+export interface TripSubmission {
   startCity: string;
   destinationCity: string;
   countries: string[];
-  postDate: string;
   posterUID: string;
   price: number;
   tripDurationDays: number;
@@ -16,9 +15,10 @@ export interface TripData {
   imageURLs: string[];
 }
 
-export default interface Trip extends TripData {
+export default interface Trip extends TripSubmission {
   tripId: string;
   averageRating: number;
+  postDate: string;
 }
 
 export const getTrips = (): Promise<Trip[]> => get("trips/");
@@ -26,6 +26,9 @@ export const getTrips = (): Promise<Trip[]> => get("trips/");
 export const getTripById = (tripId: string): Promise<Trip> =>
   get("trips/" + tripId);
 
-export const putTrip = (trip: Trip) => put("trips/", trip);
+export const putTrip = (tripId: string, trip: TripSubmission) => {
+  put("trips/" + tripId, trip);
+};
 
-export const postTrip = (trip: TripData) => post("trips/", trip);
+export const postTrip = (trip: TripSubmission): Promise<Trip> =>
+  post("trips/", trip);

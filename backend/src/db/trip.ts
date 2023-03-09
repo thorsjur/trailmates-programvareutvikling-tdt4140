@@ -6,34 +6,45 @@ import {
   collection,
   addDoc,
 } from "firebase/firestore";
+import {
+  toTrip,
+  toTripData,
+  Trip,
+  TripData,
+  TripSubmission,
+} from "../model/trip";
 import db from "./db";
-import { TripData, Trip } from "../model/TripData";
 
 export const getTripById = async (tripId: string) => {
-  const trip = await getDoc(doc(db, "trip", tripId));
-  if (!trip.exists()) {
+  const tripDocument = await getDoc(doc(db, "trip", tripId));
+  if (!tripDocument.exists()) {
     console.log("No such document exists!");
   }
-  return { tripId: trip.id, averageRating: 3, ...(trip.data() as TripData) };
+  return toTrip(tripDocument.id, tripDocument.data() as TripData);
 };
 
 export const getTrips = async (): Promise<Trip[]> => {
-  const tripData = await getDocs(collection(db, "trip"));
+  const tripDocuments = await getDocs(collection(db, "trip"));
 
-  if (tripData.empty) {
+  if (tripDocuments.empty) {
     console.log("No trips found!");
   }
-  return tripData.docs.map((trip) => {
-    return { tripId: trip.id, averageRating: 3, ...(trip.data() as TripData) };
-  });
+  return tripDocuments.docs.map((tripDocument) =>
+    toTrip(tripDocument.id, tripDocument.data() as TripData),
+  );
 };
 
-export const putTrip = (trip: Trip) => {
-  const { tripId, ...tripData } = trip;
-  return setDoc(doc(db, "trip", tripId), tripData, { merge: true });
+export const putTrip = async (
+  tripId: string,
+  tripSubmission: TripSubmission,
+) => {
+  await setDoc(doc(db, "trip", tripId), tripSubmission, { merge: true });
 };
 
-export const postTrip = (trip: Trip) => {
-  const { tripId, ...tripData } = trip;
-  return addDoc(collection(db, "trip"), tripData);
+export const postTrip = async (
+  tripSubmission: TripSubmission,
+): Promise<Trip> => {
+  const tripData = toTripData(tripSubmission);
+  const collectionReference = await addDoc(collection(db, "trip"), tripData);
+  return toTrip(collectionReference.id, tripData);
 };
