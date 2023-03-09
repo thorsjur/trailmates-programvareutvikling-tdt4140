@@ -1,7 +1,6 @@
 import { FirebaseError } from "firebase/app";
 import {
   createUserWithEmailAndPassword,
-  UserCredential,
   signInWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
@@ -26,54 +25,52 @@ const toAuthError = (error: FirebaseError) =>
     "auth/wrong-password": AuthError.INVALID_EMAIL_OR_PASSWORD,
   }[error.code] || AuthError.OTHER);
 
-export const signUp: (
+export const signUp = async (
   email: string,
   password: string,
   name: string,
-) => Promise<AuthError | undefined> = (
-  email,
-  password,
-  name,
   userType = "User",
-) => {
-  return createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredentials: UserCredential) => {
-      const userUid = userCredentials.user.uid;
-      return putUserData(userUid, { name: name, userType: userType })
-        .then((res: Response) => {
-          if (res.status === 500) {
-            return AuthError.OTHER;
-          }
-          console.log(`Signed up with email: ${email}`);
-          return undefined;
-        })
-        .catch((error) => {
-          // Undo creation of Firebase Auth user.
-          auth.currentUser?.delete().then(() => {
-            return AuthError.OTHER;
-          });
-          return AuthError.OTHER;
-        });
-    })
-    .catch((error: FirebaseError) => {
-      console.log(error.code);
-      return toAuthError(error);
-    });
+): Promise<AuthError | undefined> => {
+  try {
+    const userCredentials = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password,
+    );
+    const userUid = userCredentials.user.uid;
+    try {
+      const res = await putUserData(userUid, {
+        name: name,
+        userType: userType,
+      });
+      if (res.status === 500) {
+        return AuthError.OTHER;
+      }
+      console.log(`Signed up with email: ${email}`);
+      return undefined;
+    } catch (error) {
+      // Undo creation of Firebase Auth user.
+      await auth.currentUser?.delete();
+      return AuthError.OTHER;
+    }
+  } catch (error) {
+    console.log(error);
+    return toAuthError(error as FirebaseError);
+  }
 };
 
 export const logIn: (
   email: string,
   password: string,
-) => Promise<AuthError | undefined> = (email, password) => {
-  return signInWithEmailAndPassword(auth, email, password)
-    .then((userCredentials: UserCredential) => {
-      console.log(`Logged in with email: ${email}`);
-      return undefined;
-    })
-    .catch((error: FirebaseError) => {
-      console.log(error.code);
-      return toAuthError(error);
-    });
+) => Promise<AuthError | undefined> = async (email, password) => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    console.log(`Logged in with email: ${email}`);
+    return undefined;
+  } catch (error) {
+    console.log(error);
+    return toAuthError(error as FirebaseError);
+  }
 };
 
 export const logOut = () => {
@@ -81,15 +78,13 @@ export const logOut = () => {
   signOut(auth);
 };
 
-export const resetPassword = (email: string) => {
-  sendPasswordResetEmail(auth, email)
-    .then(() => console.log("Password email sent."))
-    .catch(console.error);
+export const resetPassword = async (email: string) => {
+  await sendPasswordResetEmail(auth, email);
+  console.log("Password email sent.");
 };
 
-export const setEmail = (newEmail: string) => {
+export const setEmail = async (newEmail: string) => {
   if (auth.currentUser === null) return;
-  updateEmail(auth.currentUser, newEmail)
-    .then(() => console.log("Email updated."))
-    .catch(console.error);
+  await updateEmail(auth.currentUser, newEmail);
+  console.log("Email updated.");
 };

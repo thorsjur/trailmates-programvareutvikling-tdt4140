@@ -33,6 +33,16 @@ export const TripPage = () => {
     });
   };
 
+  const updateImageUrls = async () => {
+    if (!trip) return;
+    const newUrls: string[] = await Promise.all(
+      trip.imageIds.map((imageId) =>
+        getImgUrl(`trips/${trip.tripId}/${imageId}`),
+      ),
+    );
+    setImageUrls(newUrls);
+  };
+
   useEffect(() => {
     document.title = "Trailmates - Reiseinformajon";
   }, []);
@@ -44,10 +54,7 @@ export const TripPage = () => {
 
   useEffect(() => {
     if (!trip) return;
-    trip.imageIds.forEach(async (imageId) => {
-      const imageUrl = await getImgUrl(`trips/${trip.tripId}/${imageId}`);
-      setImageUrls((prev) => [...prev, imageUrl]);
-    });
+    updateImageUrls();
     getUserData(trip.posterUid).then(setUser);
   }, [trip]);
 

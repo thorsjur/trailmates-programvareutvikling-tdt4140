@@ -3,7 +3,7 @@ import ImageUpload from "../../components/ImageUpload/ImageUpload";
 import "./TripForm.css";
 import { UserContext } from "../../authentication/UserProvider";
 import { uploadFile } from "../../storage/util/methods";
-import Trip, { postTrip, TripSubmission } from "../../trips/trip";
+import { postTrip, TripSubmission } from "../../trips/trip";
 
 interface CustomElements extends HTMLFormControlsCollection {
   startCity: HTMLInputElement;
