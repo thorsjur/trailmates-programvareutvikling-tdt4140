@@ -6,6 +6,8 @@ import {
   UserCredential,
   signInWithEmailAndPassword,
   signOut,
+  sendPasswordResetEmail,
+  updateEmail,
 } from "firebase/auth";
 import { putUserData } from "./firestore";
 
@@ -96,4 +98,17 @@ export const logIn: (
 export const logOut = () => {
   console.log("Logging out");
   signOut(auth);
+};
+
+export const resetPassword = (email: string) => {
+  sendPasswordResetEmail(auth, email)
+    .then(() => console.log("Password email sent."))
+    .catch(console.error);
+};
+
+export const setEmail = (newEmail: string) => {
+  if (auth.currentUser === null) return;
+  updateEmail(auth.currentUser, newEmail)
+    .then(() => console.log("Email updated."))
+    .catch(console.error);
 };
