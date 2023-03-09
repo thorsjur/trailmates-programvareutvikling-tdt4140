@@ -74,10 +74,11 @@
   margin: 2vh auto;
   overflow: hidden;
   position: relative;
+  background-color: #222222;
 }
 
 .private-profile-img {
-  background-size: contain;
+  background-size: cover;
   height: 100%;
   width: 100%;
   transition: 0.3s;
@@ -101,6 +102,10 @@
   font-weight: 500;
   cursor: pointer;
   transition: 0.2s;
+}
+
+.private-profile-upload-text.missing-image {
+  visibility: visible;
 }
 
 .private-profile-upload-text:hover {
