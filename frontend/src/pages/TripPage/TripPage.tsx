@@ -1,4 +1,4 @@
-import { Component, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./TripPage.css";
 import img from "../../components/assets/TripPage_header.png";
 import { Button } from "../../components/Button/Button";
@@ -17,6 +17,9 @@ import { getImgSrc } from "../../storage/util/methods";
 
 const defaultProfilePicUrl =
   "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+
+const maybe = (string: string | undefined): string =>
+  string !== undefined ? string : "N/A";
 
 export const TripPage = () => {
   const { tripId } = useParams();
@@ -74,8 +77,12 @@ export const TripPage = () => {
         <div className="cover-info-container">
           <div className="flex-column cover-TripPage-info">
             <p> Av {user && user.name}</p>
-            <h1> {trip?.startDestination + " - " + trip?.endDestination}</h1>
-            <h2> {trip?.startDestination + " - " + trip?.endDestination}</h2>
+            <h1>
+              {` ${maybe(trip?.startCity)} - ${maybe(trip?.destinationCity)}`}
+            </h1>
+            <h2>
+              {` ${maybe(trip?.startCity)} - ${maybe(trip?.destinationCity)}`}
+            </h2>
           </div>
           <div className="trippage-scrolldown-indicator">
             <a>╲╱</a>
@@ -115,35 +122,35 @@ export const TripPage = () => {
           <div className="trippage-general-info-row flex-row">
             <TripDetailsItem
               title={"Startdestinasjon"}
-              content={trip ? trip.startDestination : "N/A"}
+              content={maybe(trip?.startCity)}
             />
             <TripDetailsItem
               title={"Reisemål"}
-              content={trip ? trip.endDestination : "N/A"}
+              content={maybe(trip?.destinationCity)}
             />
             <TripDetailsItem
               title={"Land"}
-              content={trip ? trip.countries.join(", ") : "N/A"}
+              content={maybe(trip?.countries.join(", "))}
             />
           </div>
           <div className="trippage-general-info-row flex-row">
             <TripDetailsItem
               title={"Pris"}
-              content={trip ? trip.price.toString() : "N/A"}
+              content={maybe(trip?.price.toString())}
             />
             <TripDetailsItem
               title={"Reisetid"}
-              content={trip ? `${trip.tripDurationDays} dager` : "N/A"}
+              content={maybe(`${trip?.tripDurationDays} dager`)}
             />
             <TripDetailsItem
               title={"Vurderinger"}
-              content={trip ? trip.averageRating.toString() : "N/A"}
+              content={maybe(trip?.averageRating.toString())}
             />
           </div>
         </div>
         <div className="trippage-general-info-right">
           <TripAuthor
-            author={user ? user.name : "N/A"}
+            author={maybe(user?.name)}
             trips={11}
             profilePic={profilePictureUrl ? profilePictureUrl : ""}
           />
@@ -188,7 +195,7 @@ export const TripPage = () => {
             />
           </div>
           <div className="text-wrapper">
-            <p>{trip ? trip.description : "N/A"}</p>
+            <p>{maybe(trip?.description)}</p>
           </div>
         </div>
         <div className="trippage-main-r flex-column">
@@ -214,15 +221,15 @@ export const TripPage = () => {
           <div className="trippage-extra-info"></div>
           <div className="trippage-extra-itemwrapper">
             <h3>Klima</h3>
-            <p>{`${trip?.degreesCelcius} grader celcius`}</p>
+            <p>{maybe(`${trip?.degreesCelcius} grader celcius`)}</p>
           </div>
           <div className="trippage-extra-itemwrapper">
             <h3>Reiselengde</h3>
-            <p>{`${trip?.tripLengthKm} km`}</p>
+            <p>{maybe(`${trip?.tripLengthKm} km`)}</p>
           </div>
           <div className="trippage-extra-itemwrapper">
             <h3>Attraksjoner</h3>
-            <p>{trip ? trip.attractions.join(", ") : "N/A"}</p>
+            <p>{maybe(trip?.attractions.join(", "))}</p>
           </div>
           <div
             style={{

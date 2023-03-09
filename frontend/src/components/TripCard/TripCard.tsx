@@ -45,7 +45,7 @@ export const TripCard = ({ trip, color }: Props) => {
         </div>
       </div>
       <div className={color}>
-        <h3>{trip.startDestination}</h3>
+        <h3>{trip.destinationCity}</h3>
         <h4>{trip.countries[0]}</h4>
         <h5>Vurdering: {trip.averageRating}/5</h5>
         <h5>Estimert kostnad: {trip.price} NOK</h5>

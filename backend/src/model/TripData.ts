@@ -1,6 +1,6 @@
 export interface TripData {
-  startDestination: string;
-  endDestination: string;
+  startCity: string;
+  destinationCity: string;
   countries: string[];
   postDate: string;
   posterUID: string;

@@ -34,7 +34,7 @@
 }
 
 .public-profile-img {
-  background-size: contain;
+  background-size: cover;
   border: var(--secondary) 0.5vw solid;
   width: 20vw;
   height: 20vw;

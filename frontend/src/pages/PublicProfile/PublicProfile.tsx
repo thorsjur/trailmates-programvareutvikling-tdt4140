@@ -9,6 +9,7 @@ import { User, UserContext } from "../../authentication/UserProvider";
 import { getImgSrc } from "../../storage/util/methods";
 import Trip, { getTrips } from "../../trips/trip";
 
+
 export const PublicProfile = () => {
   const [user, setUser] = useState<UserData | User | null>();
   const [isValidUser, setIsValidUser] = useState<boolean>(false);
@@ -46,6 +47,9 @@ export const PublicProfile = () => {
   }, [user]);
 
   useEffect(() => {
+    if (fname?.endsWith("s")){
+      document.title = fname + " sin profil";
+    }
     document.title = fname + "s profil";
 
     getImgSrc(`profilepics/${uid}`).then((url) => {
