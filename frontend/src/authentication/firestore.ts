@@ -10,12 +10,12 @@ export interface UserData {
   phoneNumber?: string;
 }
 
-export const getUserData: (userUid: string) => Promise<UserData> = async (
+export const getUserData: (userUid: string) => Promise<UserData> = (
   userUid: string,
 ) => {
-  return await get(userUid);
+  return get("user/" + userUid);
 };
 
 export const putUserData = (userUid: string, userData: UserData) => {
-  return put(userUid, userData);
+  return put("user/" + userUid, userData);
 };

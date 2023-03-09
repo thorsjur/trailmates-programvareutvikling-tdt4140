@@ -7,6 +7,7 @@ import { UserData, getUserData } from "../../authentication/firestore";
 import { useParams } from "react-router-dom";
 import { User, UserContext } from "../../authentication/UserProvider";
 import { getImgSrc } from "../../storage/util/methods";
+import Trip, { getTrips } from "../../trips/trip";
 
 export const PublicProfile = () => {
   const [user, setUser] = useState<UserData | User | null>();
@@ -14,6 +15,13 @@ export const PublicProfile = () => {
   const { uid } = useParams();
   const { currentUser } = useContext(UserContext);
   const [profilePicSrc, setProfilePicSrc] = useState<string>();
+  const [trips, setTrips] = useState<Trip[]>([]);
+
+  useEffect(() => {
+    getTrips().then((trips) => {
+      setTrips(trips);
+    });
+  }, []);
 
   useEffect(() => {
     if (uid === currentUser?.userUid) {
@@ -94,7 +102,7 @@ export const PublicProfile = () => {
               <h2>{fname}s reiser!</h2>
               <TitleSeperator height="5px" width="25vw" color="accent" />
             </div>
-            <TripSection text="" textColor="white" />
+            <TripSection trips={trips} text="" textColor="white" />
           </div>
           <div className="container-public-user-reviews flex-column">
             <h2>{fname}s erfaringer</h2>

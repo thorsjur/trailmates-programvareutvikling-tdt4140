@@ -24,7 +24,7 @@ export const getTrips = async (): Promise<Trip[]> => {
     console.log("No trips found!");
   }
   return tripData.docs.map((trip) => {
-    return { tripId: trip.id, ...(trip.data() as TripData) };
+    return { tripId: trip.id, averageRating: 3, ...(trip.data() as TripData) };
   });
 };
 

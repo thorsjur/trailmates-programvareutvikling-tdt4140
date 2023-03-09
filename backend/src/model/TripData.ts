@@ -1,5 +1,6 @@
 export interface TripData {
   startDestination: string;
+  endDestination: string;
   countries: string[];
   postDate: string;
   posterUID: string;
@@ -14,4 +15,5 @@ export interface TripData {
 
 export interface Trip extends TripData {
   tripId: string;
+  averageRating: number;
 }

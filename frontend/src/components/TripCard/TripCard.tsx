@@ -2,7 +2,8 @@ import { useState } from "react";
 import { ReactComponent as FilledHeart } from "../../resources/media/heart-filled-icon.svg";
 import { ReactComponent as Arrow } from "../../components/assets/card-arrow.svg";
 import "./TripCard.css";
-import { Trip } from "../../types/types";
+import Trip from "../../trips/trip";
+import { NavLink } from "react-router-dom";
 
 interface Props {
   trip: Trip;
@@ -22,7 +23,7 @@ export const TripCard = ({ trip, color }: Props) => {
     <div className="card-container">
       <div
         className="card-image"
-        style={{ backgroundImage: `url(${trip.img})` }}
+        //style={{}}
       >
         <div className="container-card-readmore flex-column">
           <FilledHeart
@@ -30,19 +31,19 @@ export const TripCard = ({ trip, color }: Props) => {
             onClick={handleClick}
           />
           <div className="card-readmore-text">
-            <div className="flex-row">
-              <a>Les mer</a>
+            <NavLink className="flex-row" end to="/reiserute">
+              Les mer
               <Arrow className="card-readmore-arrow" />
-            </div>
+            </NavLink>
             <div className="card-readmore-underline"></div>
           </div>
         </div>
       </div>
       <div className={color}>
-        <h3>{trip.destination}</h3>
-        <h4>{trip.country}</h4>
-        <h5>Vurdering: {trip.rating}/5</h5>
-        <h5>Estimert kostnad: {trip.estimatedCost} NOK</h5>
+        <h3>{trip.startDestination}</h3>
+        <h4>{trip.countries[0]}</h4>
+        <h5>Vurdering: {trip.averageRating}/5</h5>
+        <h5>Estimert kostnad: {trip.price} NOK</h5>
       </div>
     </div>
   );

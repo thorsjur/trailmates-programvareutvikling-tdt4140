@@ -1,4 +1,4 @@
-const baseUserURI = "http://localhost:3001/user/";
+const baseUserURI = "http://localhost:3001/";
 
 export const get: (path: string) => Promise<any> = async (path) => {
   const response = await fetch(baseUserURI + path);
