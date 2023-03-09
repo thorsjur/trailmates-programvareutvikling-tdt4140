@@ -1,28 +1,25 @@
-const baseUserURI = "http://localhost:3001/user/";
+const baseUserURI = "http://localhost:3001/";
 
-export const get: (path: string) => Promise<any> = async (path) => {
+export const get = async (path: string): Promise<any> => {
   const response = await fetch(baseUserURI + path);
-  return await response.json();
+  return response.json();
 };
 
-export const put: (path: string, data: {}) => Promise<Response> = (
-  path,
-  data,
-) => {
-  return fetch(baseUserURI + path, {
+export const put = async (path: string, data: {}): Promise<any> => {
+  const response = await fetch(baseUserURI + path, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
+  return response.json();
 };
 
-export const post: (path: string, data: {}) => Promise<Response> = (
-  path,
-  data,
-) => {
-  return fetch(baseUserURI + path, {
+export const post = async (path: string, data: {}): Promise<any> => {
+  const response = await fetch(baseUserURI + path, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
+
+  return response.json();
 };

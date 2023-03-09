@@ -18,7 +18,7 @@ export const downloadFile = async (path: string) => {
   return null;
 };
 
-export const getImgSrc = async (path: string) => {
+export const getImgUrl = async (path: string) => {
   const reference = ref(storage, path);
   return getDownloadURL(reference);
 };

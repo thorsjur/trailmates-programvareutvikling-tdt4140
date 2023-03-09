@@ -2,8 +2,8 @@ import { FormEvent, useContext, useState } from "react";
 import ImageUpload from "../../components/ImageUpload/ImageUpload";
 import "./TripForm.css";
 import { UserContext } from "../../authentication/UserProvider";
-import { TripData } from "../../types/Trip";
 import { uploadFile } from "../../storage/util/methods";
+import { postTrip, TripSubmission } from "../../trips/trip";
 
 interface CustomElements extends HTMLFormControlsCollection {
   startCity: HTMLInputElement;
@@ -28,7 +28,7 @@ export const TripForm = () => {
 
   const uploadFiles = async (tripId: string) => {
     for (let i = 0; i < (files?.length || 0); i++) {
-      const file = files?.item(0);
+      const file = files?.item(i);
       if (
         file?.type !== "image/png" &&
         file?.type !== "image/jpeg" &&
@@ -45,11 +45,11 @@ export const TripForm = () => {
     }
   };
 
-  const onSubmit = (event: FormEvent<CustomForm>) => {
+  const onSubmit = async (event: FormEvent<CustomForm>) => {
     event.preventDefault();
     const target = event.currentTarget.elements;
 
-    const data: TripData = {
+    const tripSubmission: TripSubmission = {
       startCity: target.startCity.value,
       destinationCity: target.destinationCity.value,
       countries: target.countries.value.split(new RegExp(", +")),
@@ -59,18 +59,12 @@ export const TripForm = () => {
       tripLengthKm: parseInt(target.tripLengthKm.value),
       description: target.description.value,
       attractions: target.attractions.value.split(new RegExp(", +")),
-
-      imageURLs: imageIds,
-      postDate: Date.now().toString(),
-      posterUID: currentUser?.userUid!,
+      imageIds: imageIds,
+      posterUid: currentUser?.userUid!,
     };
 
-    console.log(data);
-    // Her vil den sende et API kall for å laste opp reisen
-    // Den må så få sendt tilbake den gitte IDen for reisen (gitt av Firebase)
-    // ===== Eksempel ======
-    // const tripId = createTrip(data);
-    // uploadFiles(tripId);
+    const { tripId } = await postTrip(tripSubmission);
+    uploadFiles(tripId);
   };
 
   return (

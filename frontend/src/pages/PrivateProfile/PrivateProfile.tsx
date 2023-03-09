@@ -5,7 +5,7 @@ import { useEffect, useContext, ChangeEvent, useRef, useState } from "react";
 import { UserContext } from "../../authentication/UserProvider";
 import { Navigate, useNavigate } from "react-router-dom";
 import { logOut } from "../../authentication/authentication";
-import { uploadFile, getImgSrc } from "../../storage/util/methods";
+import { uploadFile, getImgUrl } from "../../storage/util/methods";
 
 export const PrivateProfile = () => {
   const { currentUser } = useContext(UserContext);
@@ -19,7 +19,7 @@ export const PrivateProfile = () => {
   }, []);
 
   useEffect(() => {
-    getImgSrc(`profilepics/${currentUser?.userUid}`)
+    getImgUrl(`profilepics/${currentUser?.userUid}`)
       .then((url) => {
         setImageURL(url);
         setHasImage(true);
@@ -43,7 +43,7 @@ export const PrivateProfile = () => {
     const path = `profilepics/${currentUser?.userUid}`;
 
     await uploadFile(file, path);
-    await getImgSrc(`profilepics/${currentUser?.userUid}`).then((url) => {
+    await getImgUrl(`profilepics/${currentUser?.userUid}`).then((url) => {
       setImageURL(url);
     });
   };
