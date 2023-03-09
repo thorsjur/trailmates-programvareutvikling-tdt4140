@@ -29,7 +29,7 @@ export const App = () => {
             <Route path="/" element={<Frontpage />} />
             <Route path="/profile" element={<PrivateProfile />} />
             <Route path="/profile/:uid" element={<PublicProfile />} />
-            <Route path="/reiserute" element={<TripPage />} />
+            <Route path="/reiserute/:tripId" element={<TripPage />} />
           </Routes>
           <Footer />
         </main>

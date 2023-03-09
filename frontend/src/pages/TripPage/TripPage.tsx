@@ -4,16 +4,27 @@ import img from "../../components/assets/TripPage_header.png";
 import { Button } from "../../components/Button/Button";
 import { TripDetailsItem } from "../../components/TripDetailsItem/TripDetailsItem";
 import { ReviewBox } from "../../components/ReviewBox/ReviewBox";
-import profilepic from "../../components/assets/profilepic.png";
 import { TripAuthor } from "../../components/TripAuthor/TripAuthor";
 import { PopupImageCarousel } from "../../components/PopupImageCarousel/PopupImageCarousel";
 import caro1 from "../../components/assets/caro/caro1.png";
 import caro2 from "../../components/assets/caro/caro2.png";
 import caro3 from "../../components/assets/caro/caro3.png";
 import caro4 from "../../components/assets/caro/caro4.png";
-import { CloseButton } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import Trip, { getTripById } from "../../trips/trip";
+import { getUserData, UserData } from "../../authentication/firestore";
+import { getImgSrc } from "../../storage/util/methods";
+
+const defaultProfilePicUrl =
+  "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 
 export const TripPage = () => {
+  const { tripId } = useParams();
+  const [trip, setTrip] = useState<Trip | undefined>();
+  const [user, setUser] = useState<UserData | undefined>();
+  const [profilePictureUrl, setProfilePicUrl] =
+    useState<string>(defaultProfilePicUrl);
+
   const scrolldown = () => {
     window.scrollTo({
       top: window.innerHeight - 10,
@@ -26,6 +37,18 @@ export const TripPage = () => {
   useEffect(() => {
     document.title = "Trailmates - Reiseinformajon";
   }, []);
+  useEffect(() => {
+    if (tripId) {
+      getTripById(tripId).then((trip) => {
+        setTrip(trip);
+        getUserData(trip.posterUID).then((user) => {
+          setUser(user);
+          getImgSrc(`profilepics/${trip.posterUID}`).then(setProfilePicUrl);
+        });
+      });
+    }
+  }, []);
+
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const images = [caro1, caro2, caro3, caro4];
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -50,9 +73,9 @@ export const TripPage = () => {
       >
         <div className="cover-info-container">
           <div className="flex-column cover-TripPage-info">
-            <p> Av John Doe</p>
-            <h1> Oslo - La Rioja</h1>
-            <h2> NORGE - SPANIA</h2>
+            <p> Av {user && user.name}</p>
+            <h1> {trip?.startDestination + " - " + trip?.endDestination}</h1>
+            <h2> {trip?.startDestination + " - " + trip?.endDestination}</h2>
           </div>
           <div className="trippage-scrolldown-indicator">
             <a>╲╱</a>
@@ -90,18 +113,40 @@ export const TripPage = () => {
       <div className="container-general-info flex-row">
         <div className="trippage-general-info-left flex-column">
           <div className="trippage-general-info-row flex-row">
-            <TripDetailsItem title={"Startdestinasjon"} content={"Oslo"} />
-            <TripDetailsItem title={"Reisemål"} content={"Spania"} />
-            <TripDetailsItem title={"Land"} content={"Russland"} />
+            <TripDetailsItem
+              title={"Startdestinasjon"}
+              content={trip ? trip.startDestination : "N/A"}
+            />
+            <TripDetailsItem
+              title={"Reisemål"}
+              content={trip ? trip.endDestination : "N/A"}
+            />
+            <TripDetailsItem
+              title={"Land"}
+              content={trip ? trip.countries.join(", ") : "N/A"}
+            />
           </div>
           <div className="trippage-general-info-row flex-row">
-            <TripDetailsItem title={"Pris"} content={"1MNOK"} />
-            <TripDetailsItem title={"Reisetid"} content={"4 uker"} />
-            <TripDetailsItem title={"Vurderinger"} content={"-3"} />
+            <TripDetailsItem
+              title={"Pris"}
+              content={trip ? trip.price.toString() : "N/A"}
+            />
+            <TripDetailsItem
+              title={"Reisetid"}
+              content={trip ? `${trip.tripDurationDays} dager` : "N/A"}
+            />
+            <TripDetailsItem
+              title={"Vurderinger"}
+              content={trip ? trip.averageRating.toString() : "N/A"}
+            />
           </div>
         </div>
         <div className="trippage-general-info-right">
-          <TripAuthor author={"Jane Doe"} trips={11} profilePic={profilepic} />
+          <TripAuthor
+            author={user ? user.name : "N/A"}
+            trips={11}
+            profilePic={profilePictureUrl ? profilePictureUrl : ""}
+          />
         </div>
       </div>
       <div className="trippage-main-container flex-row">
@@ -143,42 +188,7 @@ export const TripPage = () => {
             />
           </div>
           <div className="text-wrapper">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-              <br />
-              <br />
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-              <br />
-              <br />
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-              <br />
-              <br />
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            <p>{trip ? trip.description : "N/A"}</p>
           </div>
         </div>
         <div className="trippage-main-r flex-column">
@@ -204,18 +214,15 @@ export const TripPage = () => {
           <div className="trippage-extra-info"></div>
           <div className="trippage-extra-itemwrapper">
             <h3>Klima</h3>
-            <p>Varmt, 30 grader celcius</p>
+            <p>{`${trip?.degreesCelcius} grader celcius`}</p>
           </div>
           <div className="trippage-extra-itemwrapper">
             <h3>Reiselengde</h3>
-            <p>1 453 kilometer</p>
+            <p>{`${trip?.tripLengthKm} km`}</p>
           </div>
           <div className="trippage-extra-itemwrapper">
             <h3>Attraksjoner</h3>
-            <p>
-              Eiffeltårnet, Stockholm Universitet, Odense, Barcelona Katedral,
-              Warsawa Gamlebyen
-            </p>
+            <p>{trip ? trip.attractions.join(", ") : "N/A"}</p>
           </div>
           <div
             style={{
@@ -238,7 +245,7 @@ export const TripPage = () => {
           author={"Krisitan Holgren"}
           rating={"3/5"}
           travels={"11 Reiser"}
-          profilePic={profilepic}
+          profilePic={defaultProfilePicUrl}
         />
         <ReviewBox
           title={"En helt OK reise! - Reiste 12. September 2021"}
@@ -248,7 +255,7 @@ export const TripPage = () => {
           author={"Krisitan Holgren"}
           rating={"5/5"}
           travels={"10 Reiser"}
-          profilePic={profilepic}
+          profilePic={defaultProfilePicUrl}
         />
       </div>
       <div className="trippage-write-review flex-column">

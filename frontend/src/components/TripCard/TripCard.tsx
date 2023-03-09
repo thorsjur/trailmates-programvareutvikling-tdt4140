@@ -31,7 +31,12 @@ export const TripCard = ({ trip, color }: Props) => {
             onClick={handleClick}
           />
           <div className="card-readmore-text">
-            <NavLink className="flex-row" end to="/reiserute">
+            <NavLink
+              style={{ textDecoration: "none" }}
+              className="flex-row"
+              end
+              to={"/reiserute/" + trip.tripId}
+            >
               Les mer
               <Arrow className="card-readmore-arrow" />
             </NavLink>

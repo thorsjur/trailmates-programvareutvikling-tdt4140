@@ -11,7 +11,9 @@ interface Props {
 }
 
 export const TripSection = ({ text, trips, textColor }: Props) => {
-  const items = trips.map((trip) => <TripCard trip={trip} color={textColor} />);
+  const items = trips.map((trip, index) => (
+    <TripCard trip={trip} key={index} color={textColor} />
+  ));
 
   return (
     <div className="trip-section">

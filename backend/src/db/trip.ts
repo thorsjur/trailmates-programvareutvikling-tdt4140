@@ -14,7 +14,7 @@ export const getTripById = async (tripId: string) => {
   if (!trip.exists()) {
     console.log("No such document exists!");
   }
-  return { tripId: trip.id, ...(trip.data() as TripData) };
+  return { tripId: trip.id, averageRating: 3, ...(trip.data() as TripData) };
 };
 
 export const getTrips = async (): Promise<Trip[]> => {
