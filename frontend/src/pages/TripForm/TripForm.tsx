@@ -5,6 +5,7 @@ import { UserContext } from "../../authentication/UserProvider";
 import { uploadFile } from "../../storage/util/methods";
 import { postTrip, TripSubmission } from "../../trips/trip";
 import { Navigate, useNavigate } from "react-router-dom";
+import { LoadingIndicator } from "../../components/LoadingIndicator/LoadingIndicator";
 
 interface CustomElements extends HTMLFormControlsCollection {
   startCity: HTMLInputElement;
@@ -67,6 +68,7 @@ export const TripForm = () => {
       imageIds: imageIds,
       posterUid: currentUser?.userUid!,
     };
+
     setIsLoading(true);
     const { tripId } = await postTrip(tripSubmission);
     await uploadFiles(tripId);
@@ -80,6 +82,7 @@ export const TripForm = () => {
 
   return (
     <form className="form" onSubmit={onSubmit}>
+      <LoadingIndicator isLoading={isLoading} />
       <div className="left-container-d">
         <div className="title">Generelt</div>
         <div className="field">
