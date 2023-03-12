@@ -26,8 +26,8 @@ const iconComponents = {
   heart: <HeartIcon />,
   images: <ImagesIcon />,
   comment: <CommentIcon />,
-  plusOrange: <PlusOrangeIcon />,
-  plusBlue: <PlusBlueIcon />,
+  plusOrange: <PlusOrangeIcon className="plus" />,
+  plusBlue: <PlusBlueIcon className="plus" />,
 };
 
 export const Button = ({

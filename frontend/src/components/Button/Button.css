@@ -54,3 +54,11 @@
 .hide {
   display: none !important;
 }
+
+.button svg {
+  margin-left: 10%;
+}
+
+.plus {
+  margin-left: 0 !important;
+}
