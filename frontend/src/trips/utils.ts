@@ -1,4 +1,4 @@
-import { Trip } from "../types/types";
+import { Trip } from "./trip";
 
 /**
  * Removes duplicate trips from an array of trips.
@@ -8,7 +8,6 @@ import { Trip } from "../types/types";
  */
 export const removeDuplicates = (trips: Trip[]): Trip[] => {
   const uniqueTrips: Trip[] = [];
-  console.log("before", trips);
   trips.forEach((trip) => {
     if (
       !uniqueTrips.some((uniqueTrip) => {
@@ -30,7 +29,6 @@ export const removeDuplicates = (trips: Trip[]): Trip[] => {
       uniqueTrips.push(trip);
     }
   });
-  console.log("after", uniqueTrips);
   return uniqueTrips;
 };
 
@@ -41,13 +39,5 @@ export const filterTripsByFieldEquality = (
 ): Trip[] => {
   return trips.filter((trip) => {
     return trip[field] === value;
-  });
-};
-
-export const sortTripsByDate = (trips: Trip[], asc: boolean = true): Trip[] => {
-  return trips.sort((a, b) => {
-    const dateA = parseInt(a.postDate);
-    const dateB = parseInt(b.postDate);
-    return asc ? dateA - dateB : dateB - dateA;
   });
 };

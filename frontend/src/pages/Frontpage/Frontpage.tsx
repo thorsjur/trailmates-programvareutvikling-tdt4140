@@ -2,18 +2,19 @@ import { useEffect, useState } from "react";
 import { Header } from "../../components/Header/Header";
 import { SplitSection } from "../../components/SplitSection/SplitSection";
 import { TripSection } from "../../components/TripSection/TripSection";
-import { getTrips } from "../../trips/trip";
+import { getLatestTrips, getTopRatedTrips, getTrips } from "../../trips/access";
 import "./Frontpage.css";
-import { Trip } from "../../types/types";
-import { sortTripsByDate } from "../../utils/tripMethods";
+import { Trip } from "../../trips/trip";
 
 export const Frontpage = () => {
-  const [trips, setTrips] = useState<Trip[]>([]);
+  const [recommendedTrips, setRecommendedTrips] = useState<Trip[]>([]);
+  const [topRatedTrips, setTopRatedTrips] = useState<Trip[]>([]);
+  const [latestTrips, setLatestTrips] = useState<Trip[]>([]);
 
   useEffect(() => {
-    getTrips().then((trips) => {
-      setTrips(trips);
-    });
+    getTrips().then(setRecommendedTrips);
+    getTopRatedTrips().then(setTopRatedTrips);
+    getLatestTrips().then(setLatestTrips);
   }, []);
 
   useEffect(() => {
@@ -25,13 +26,21 @@ export const Frontpage = () => {
       <Header />
       <SplitSection />
       <div className="frontpage-container">
-        <TripSection trips={trips} text="Toppreiser" textColor="black" />
         <TripSection
-          trips={sortTripsByDate(trips, false)}
+          trips={topRatedTrips}
+          text="Toppreiser"
+          textColor="black"
+        />
+        <TripSection
+          trips={latestTrips}
           text="Nylig publisert"
           textColor="black"
         />
-        <TripSection trips={trips} text="Anbefalt for deg" textColor="black" />
+        <TripSection
+          trips={recommendedTrips}
+          text="Anbefalt for deg"
+          textColor="black"
+        />
       </div>
     </div>
   );
