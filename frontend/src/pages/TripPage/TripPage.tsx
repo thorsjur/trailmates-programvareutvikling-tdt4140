@@ -116,6 +116,7 @@ export const TripPage = () => {
               onClick={handleOpenPopup}
             ></Button>
             <Button
+              //TODO, make an onaction element for this
               text={"Lagre reise"}
               styling={"accent-fill"}
               width={"28%"}

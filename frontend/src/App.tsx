@@ -12,6 +12,7 @@ import { TripPage } from "./pages/TripPage/TripPage";
 import { TripForm } from "./pages/TripForm/TripForm";
 import Searchresults from "./pages/Searchresults/Searchresults";
 import { MyTrips } from "./pages/MyTrips/MyTrips";
+import { Favorites } from "./pages/Favorites/Favorites";
 
 export const App = () => {
   return (
@@ -27,6 +28,7 @@ export const App = () => {
             <Route path="/createtrip/" element={<TripForm />} />
             <Route path="/search" element={<Searchresults />} />
             <Route path="/mytrips" element={<MyTrips />} />
+            <Route path="/favourites" element={<Favorites />} />
           </Routes>
           <Footer />
         </main>
