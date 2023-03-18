@@ -8,6 +8,7 @@ import {
   getTrips,
   getTopRatedTrips,
   getLatestTrips,
+  deleteTrip,
 } from "./firestore";
 import { parseTripQuery } from "./queryParsing";
 import { startRecommendedRoutes } from "./recommended/routes";
@@ -42,7 +43,7 @@ export const startTripRoutes = (app: Express) => {
   app.get("/trips/:tripId/", async (req: Request, res: Response) => {
     try {
       const tripId = req.params.tripId;
-      const trip: Trip = await getTripById(tripId);
+      const trip = await getTripById(tripId);
       res.json(trip);
     } catch (error) {
       res.status(404).send(error);
@@ -74,6 +75,16 @@ export const startTripRoutes = (app: Express) => {
     try {
       const trip: Trip = await postTrip(req.body);
       res.json(trip);
+    } catch (error) {
+      res.status(404).send(error);
+    }
+  });
+
+  app.delete("/trips/:tripId", async (req: Request, res: Response) => {
+    try {
+      const tripId = req.params.tripId;
+      await deleteTrip(tripId);
+      res.json({ message: "OK" });
     } catch (error) {
       res.status(404).send(error);
     }
