@@ -11,11 +11,14 @@ import {
   deleteTrip,
 } from "./firestore";
 import { parseTripQuery } from "./queryParsing";
+import { startCommentsRoutes } from "./comments/routes";
 import { startRecommendedRoutes } from "./recommended/routes";
 
 export const startTripRoutes = (app: Express) => {
   //"trips/favorites/"
   startFavoritesRoutes(app);
+  //"trips/:tripId/comments"
+  startCommentsRoutes(app);
   //"trips/recommended/"
   startRecommendedRoutes(app);
 
