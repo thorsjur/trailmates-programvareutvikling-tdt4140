@@ -22,5 +22,8 @@ export const deleteTrip = (tripId: string) => del(`trips/${tripId}`);
 export const getUserTrips = (userUid: string): Promise<Trip[]> =>
   get(`users/${userUid}/trips`);
 
+export const getUserTripsCount = (userUid: string): Promise<number> =>
+  get(`users/${userUid}/trips/count`);
+
 export const getRecommendedTrips = (userUid: string): Promise<Trip[]> =>
   get(`trips/recommended/${userUid}`);

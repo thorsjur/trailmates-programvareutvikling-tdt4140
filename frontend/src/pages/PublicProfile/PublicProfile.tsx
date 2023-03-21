@@ -81,7 +81,7 @@ export const PublicProfile = () => {
                   </p>
                 )}
                 <p>
-                  Reist <b>11</b> ganger!
+                  Reist <b>{userTrips.length}</b> ganger!
                 </p>
                 {"creationDate" in user && user.creationDate && (
                   <p>

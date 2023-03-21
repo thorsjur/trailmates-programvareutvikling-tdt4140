@@ -6,7 +6,7 @@ import { ReviewBox } from "../../components/ReviewBox/ReviewBox";
 import { TripAuthor } from "../../components/TripAuthor/TripAuthor";
 import { PopupImageCarousel } from "../../components/PopupImageCarousel/PopupImageCarousel";
 import { useParams } from "react-router-dom";
-import { getTripById } from "../../trips/access";
+import { getTripById, getUserTripsCount } from "../../trips/access";
 import { getUserData, UserData } from "../../authentication/firestore";
 import { getImgUrl } from "../../storage/util/methods";
 import { Trip } from "../../trips/trip";
@@ -36,6 +36,7 @@ export const TripPage = () => {
   const { currentUser } = useContext(UserContext);
   const { currentUserFavorites, setCurrentUserFavorites } =
     useContext(FavoritesContext);
+  const [authorTripCount, setAuthorTripCount] = useState<number>(0);
 
   const scrolldown = () => {
     window.scrollTo({
@@ -72,6 +73,7 @@ export const TripPage = () => {
     if (!trip) return;
     updateImageUrls();
     getUserData(trip.posterUid).then(setUser);
+    getUserTripsCount(trip.posterUid).then(setAuthorTripCount);
   }, [trip]);
 
   useEffect(() => {
@@ -209,7 +211,7 @@ export const TripPage = () => {
         <div className="trippage-general-info-right">
           <TripAuthor
             author={maybe(user?.name)}
-            trips={11}
+            trips={authorTripCount}
             profilePic={profilePictureUrl ? profilePictureUrl : ""}
             authorUID={maybe(trip?.posterUid)}
             trip={trip}
