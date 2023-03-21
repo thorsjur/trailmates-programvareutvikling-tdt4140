@@ -18,7 +18,7 @@ export const getTripById = async (tripId: string): Promise<Trip | null> => {
   if (!tripDocument.exists()) {
     return null;
   }
-  return toTrip(tripDocument.id, tripDocument.data() as TripData);
+  return await toTrip(tripDocument.id, tripDocument.data() as TripData);
 };
 
 export const getTrips = async (
@@ -29,8 +29,10 @@ export const getTrips = async (
       ? await getDocs(collection(firestore, "trip"))
       : await getDocs(query(collection(firestore, "trip"), limit(amount)));
 
-  return tripDocuments.docs.map((tripDocument) =>
-    toTrip(tripDocument.id, tripDocument.data() as TripData),
+  return await Promise.all(
+    tripDocuments.docs.map((tripDocument) =>
+      toTrip(tripDocument.id, tripDocument.data() as TripData),
+    ),
   );
 };
 
@@ -49,7 +51,7 @@ export const postTrip = async (
     collection(firestore, "trip"),
     tripData,
   );
-  return toTrip(collectionReference.id, tripData);
+  return await toTrip(collectionReference.id, tripData);
 };
 
 export const getTopRatedTrips = async (amount: number) => {
@@ -67,8 +69,10 @@ export const getLatestTrips = async (amount: number) => {
       limit(amount),
     ),
   );
-  return tripDocuments.docs.map((tripDocument) =>
-    toTrip(tripDocument.id, tripDocument.data() as TripData),
+  return await Promise.all(
+    tripDocuments.docs.map((tripDocument) =>
+      toTrip(tripDocument.id, tripDocument.data() as TripData),
+    ),
   );
 };
 
