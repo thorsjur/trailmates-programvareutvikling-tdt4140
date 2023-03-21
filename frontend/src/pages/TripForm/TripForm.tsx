@@ -120,22 +120,22 @@ export const TripForm = () => {
           <div className="trip-form-top-left">
             <h2>1. Litt generelt om reisen</h2>
             <div className="field">
-              <label htmlFor="startCity">Hvor reiste du fra?</label>
+              <label htmlFor="startCity">Hvilken by reiste du fra?</label>
               <input
                 defaultValue={trip?.startCity}
                 className="input-box"
                 id="startCity"
-                placeholder="Roma, Stavanger, Cape Town..."
+                placeholder="Roma"
                 required
               />
             </div>
             <div className="field">
-              <label htmlFor="destinationCity">Hvor reiste du til?</label>
+              <label htmlFor="destinationCity">Hvilken by reiste du til?</label>
               <input
                 defaultValue={trip?.destinationCity}
                 className="input-box"
                 id="destinationCity"
-                placeholder="Firenze, Oslo, Mubishu..."
+                placeholder="Paris"
                 required
               />
             </div>
@@ -145,7 +145,7 @@ export const TripForm = () => {
                 defaultValue={trip?.countries.join(", ")}
                 className="input-box"
                 id="countries"
-                placeholder="Norge, USA, Island, osv..."
+                placeholder="Norge, USA, Island"
                 required
               />
             </div>
@@ -158,13 +158,13 @@ export const TripForm = () => {
                 min="0"
                 max="999999"
                 id="price"
-                placeholder="Eks. 4500, 15000,..."
+                placeholder="4500"
                 required
               />
             </div>
             <div className="field">
               <label htmlFor="tripDurationDays">
-                Hvor lang tid brukte du på reisen?
+                Hvor mange dager brukte du på reisen?
               </label>
               <input
                 defaultValue={trip?.tripDurationDays}
@@ -173,7 +173,7 @@ export const TripForm = () => {
                 min="0"
                 max="365"
                 id="tripDurationDays"
-                placeholder="Eks. 2, 3, 10..."
+                placeholder="7"
                 required
               />
             </div>
@@ -208,14 +208,14 @@ export const TripForm = () => {
               defaultValue={trip?.description}
               className="input-description"
               id="description"
-              placeholder="Skriv litt om reisen din her..."
+              placeholder="Det var godt og varmt!"
               required
             ></textarea>
           </div>
           <div className="trip-form-middle-right">
             <h2>4. Noen få reisedetaljer til</h2>
             <div className="field orange">
-              <label htmlFor="degreesCelcius">Klima</label>
+              <label htmlFor="degreesCelcius">Omtrentlig Temperatur</label>
               <input
                 defaultValue={trip?.degreesCelcius}
                 className="input-box"
@@ -224,12 +224,12 @@ export const TripForm = () => {
                 max="70"
                 step="0.1"
                 id="degreesCelcius"
-                placeholder="Forventet temperatur..."
+                placeholder="20"
                 required
               />
             </div>
             <div className="field orange">
-              <label htmlFor="tripLengthKm">Lengde</label>
+              <label htmlFor="tripLengthKm">Lengde (km)</label>
               <input
                 defaultValue={trip?.tripLengthKm}
                 className="input-box"
@@ -237,7 +237,7 @@ export const TripForm = () => {
                 min="0"
                 max="40000"
                 id="tripLengthKm"
-                placeholder="Distanse i kilometer..."
+                placeholder="300"
                 required
               />
             </div>
@@ -247,7 +247,7 @@ export const TripForm = () => {
                 defaultValue={trip?.attractions.join(", ")}
                 className="input-box"
                 id="attractions"
-                placeholder="Eiffeltårnet, Sfinx, Colosseum..."
+                placeholder="Eiffeltårnet, Sfinx, Colosseum"
                 required
               />
             </div>
