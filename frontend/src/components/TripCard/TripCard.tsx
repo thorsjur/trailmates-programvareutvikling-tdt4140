@@ -95,9 +95,9 @@ export const TripCard = ({ trip, color }: Props) => {
       </div>
       <div className={color}>
         <h3>{trip.destinationCity}</h3>
-        <h4>{trip.countries[0]}</h4>
+        <h4>{"Fra: " + trip.startCity}</h4>
         <h5>Vurdering: {trip.averageRating}/5</h5>
-        <h5>Estimert kostnad: {trip.price} NOK</h5>
+        <h5>Pris: {trip.price}kr</h5>
       </div>
     </div>
   );

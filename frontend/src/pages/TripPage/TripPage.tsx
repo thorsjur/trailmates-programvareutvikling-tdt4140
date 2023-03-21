@@ -201,7 +201,7 @@ export const TripPage = () => {
               content={maybe(`${trip?.tripDurationDays} dager`)}
             />
             <TripDetailsItem
-              title={"Vurderinger"}
+              title={"Vurdering"}
               content={maybe(trip?.averageRating.toString())}
             />
           </div>
