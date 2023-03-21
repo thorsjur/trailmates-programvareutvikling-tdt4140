@@ -53,7 +53,9 @@ export const TripAuthor = ({
           onClick={handleProfileClick}
         ></Button>
       </div>
-      {trip && currentUser?.userUid === authorUID ? (
+      {trip &&
+      (currentUser?.userUid === authorUID ||
+        currentUser?.userType === "Admin") ? (
         <>
           <div className="flex-column trippage-profile-buttons">
             <img
