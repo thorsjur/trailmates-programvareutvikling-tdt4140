@@ -1,6 +1,11 @@
 import { Express, Request, Response } from "express";
 import { startCommentsRoutes } from "./comments/routes";
-import { getUserData, getUserTrips, putUserData } from "./firestore";
+import {
+  getUserData,
+  getUserTrips,
+  getUserTripsCount,
+  putUserData,
+} from "./firestore";
 import { isValidUserType } from "./user";
 
 export const startUserRoutes = (app: Express) => {
@@ -45,4 +50,17 @@ export const startUserRoutes = (app: Express) => {
       res.status(404).send(error);
     }
   });
+
+  app.get(
+    "/users/:userUid/trips/count",
+    async (req: Request, res: Response) => {
+      try {
+        const userUid = req.params.userUid;
+        const users = await getUserTripsCount(userUid);
+        res.json(users);
+      } catch (error) {
+        res.status(404).send(error);
+      }
+    },
+  );
 };
