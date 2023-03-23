@@ -55,7 +55,7 @@
 }
 
 .comment-form-profile-pic {
-  height: 10vh;
+  height: 10vh !important;
   width: 10vh;
   border-radius: 100px;
 }

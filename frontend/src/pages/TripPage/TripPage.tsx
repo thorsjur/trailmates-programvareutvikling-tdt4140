@@ -16,16 +16,17 @@ import {
   isFavorite,
   removeFavorite,
 } from "../../trips/favorites/utils";
+import { Comment } from "../../comments/comment";
 import { FavoritesContext } from "../../trips/favorites/FavoritesProvider";
 import { LoginContext } from "../../components/LoginPopup/LoginPopup";
 import { CommentForm } from "../../components/CommentForm/CommentForm";
+import { getCommentsOnTrip } from "../../comments/access";
 
 const defaultProfilePicUrl =
   "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 
 const maybe = (string: string | undefined): string =>
   string !== undefined ? string : "N/A";
-
 export const TripPage = () => {
   const { tripId } = useParams();
   const [liked, setLiked] = useState(false);
@@ -39,6 +40,7 @@ export const TripPage = () => {
   const { currentUserFavorites, setCurrentUserFavorites } =
     useContext(FavoritesContext);
   const [authorTripCount, setAuthorTripCount] = useState<number>(0);
+  const [comments, setComments] = useState<Comment[]>([]);
   const { showLoginModal } = useContext(LoginContext);
 
   const scrolldown = () => {
@@ -82,6 +84,7 @@ export const TripPage = () => {
   useEffect(() => {
     if (!trip) return;
     getImgUrl(`profilepics/${trip.posterUid}`).then(setProfilePicUrl);
+    getCommentsOnTrip(trip.tripId).then(setComments);
   }, [user, trip]);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -334,30 +337,22 @@ export const TripPage = () => {
       <div className="trippage-review-container flex-column" ref={sectionRef}>
         <h1>Omtaler</h1>
         <div className="review-sep" />
-        <ReviewBox
-          title={"En fantastisk reise! - Reiste 10. Januar 2022"}
-          content={
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. "
-          }
-          author={"Krisitan Holgren"}
-          rating={"3/5"}
-          travels={"11 Reiser"}
-          profilePic={defaultProfilePicUrl}
-        />
-        <ReviewBox
-          title={"En helt OK reise! - Reiste 12. September 2021"}
-          content={
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. "
-          }
-          author={"Krisitan Holgren"}
-          rating={"5/5"}
-          travels={"10 Reiser"}
-          profilePic={defaultProfilePicUrl}
-        />
+
+        {comments.map((item, index) => (
+          <div key={index}>
+            <ReviewBox
+              title={item.title}
+              content={item.comment}
+              rating={item.rating.toString()}
+              authorUid={item.userUid}
+            />
+          </div>
+        ))}
       </div>
       <CommentForm
         isOpen={isCommentPopupOpen}
         onClose={handleCloseCommentPopup}
+        tripId={trip?.tripId || ""}
       ></CommentForm>
       <div className="trippage-write-review flex-column">
         <h2>Har du vært på denne reisen?</h2>
