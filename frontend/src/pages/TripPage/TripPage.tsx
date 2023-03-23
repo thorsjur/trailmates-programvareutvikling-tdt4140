@@ -214,7 +214,11 @@ export const TripPage = () => {
             />
             <TripDetailsItem
               title={"Vurdering"}
-              content={maybe(trip?.averageRating.toString())}
+              content={maybe(
+                trip?.ratings === 0
+                  ? "ingen"
+                  : trip?.averageRating.toFixed(1) + "/5",
+              )}
             />
           </div>
         </div>
