@@ -7,35 +7,35 @@ Applikasjonen er utviklet med React i frontend, med ingen forhåndslagde kompone
 Prosjektet var et gruppearbeid i faget Programvareutvikling (TDT4140).
 
 ## Bilder
-![image](https://github.com/thorsjur/TrailMates---TDT4140-Programvareutvikling/assets/113522770/1580091c-8cbd-4cc5-bc39-ca603badb2b1)
+![image](https://github.com/thorsjur/trailmates-programvareutvikling-tdt4140/assets/113522770/b3f3d75b-c799-4a65-9762-80297607fae9)
 _Bilde 1: Øverst på forsiden._ 
 <br><br>
 
-![image](https://github.com/thorsjur/TrailMates---TDT4140-Programvareutvikling/assets/113522770/5ef65349-96e4-4a63-95fa-827eaad79a03)
+![image](https://github.com/thorsjur/trailmates-programvareutvikling-tdt4140/assets/113522770/4b7a9955-e295-4dc1-a477-7240699f2d16)
 _Bilde 2: Lenger nede på forsiden, under utforsk-seksjonen._
 <br><br>
 
-![image](https://github.com/thorsjur/TrailMates---TDT4140-Programvareutvikling/assets/113522770/57eeb0d4-c4a9-41e5-9567-bf341581ca4d)
+![image](https://github.com/thorsjur/trailmates-programvareutvikling-tdt4140/assets/113522770/16f817b3-8d49-4a99-ba22-d3c8e30dc1ea)
 _Bilde 3: Side for egne reiser._
 <br><br>
 
-![image](https://github.com/thorsjur/TrailMates---TDT4140-Programvareutvikling/assets/113522770/04dccac9-f517-440c-ac1d-45a258b92b29)
+![image](https://github.com/thorsjur/trailmates-programvareutvikling-tdt4140/assets/113522770/b78b09f0-c8e7-49f2-9bb0-c7de37c18b88)
 _Bilde 4: Tilsvarende for favoritter._
 <br><br>
 
-![Lag reise](https://github.com/thorsjur/TrailMates---TDT4140-Programvareutvikling/assets/113522770/583d5af6-9ad1-42bb-9525-4b105dbac2e6)
+![Lag reise](https://github.com/thorsjur/trailmates-programvareutvikling-tdt4140/assets/113522770/ba0a898a-fdbb-41e0-8b31-9b20462d8be4)
 _Bilde 5: Lage ny reise._
 <br><br>
 
-![se på reise](https://github.com/thorsjur/TrailMates---TDT4140-Programvareutvikling/assets/113522770/fcd9eb29-a657-4ab5-a8e7-f45a3b7a717e)
+![se på reise](https://github.com/thorsjur/trailmates-programvareutvikling-tdt4140/assets/113522770/3888ce72-6e72-41a5-9dab-ea432223ca2b)
 _Bilde 6: Se på reise._
 <br><br>
 
-![Kommentarer](https://github.com/thorsjur/TrailMates---TDT4140-Programvareutvikling/assets/113522770/86ced5cf-6e4c-4f39-9089-a8d10934289a)
+![Kommentarer](https://github.com/thorsjur/trailmates-programvareutvikling-tdt4140/assets/113522770/6c424724-ab40-4bce-a852-05785636c98a)
 _Bilde 7: Legge til kommentar._
 <br><br>
 
-![Se på profiler](https://github.com/thorsjur/TrailMates---TDT4140-Programvareutvikling/assets/113522770/71ac6493-615c-47ed-94b4-1ed2b1bbcff5)
+![Se på profiler](https://github.com/thorsjur/trailmates-programvareutvikling-tdt4140/assets/113522770/e34e9e19-cb0e-4874-9a55-d1b8ca440e2f)
 _Bilde 8: Profilfunksjonalitet._
 <br><br>
 
